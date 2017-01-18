@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="grumblr">
+  <head>
+    <meta charset="utf-8">
+    <title>Grumblr</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="./js/grumblr.module.js" charset="utf-8"></script>
+    <script src="./js/grumblr.controller.js" charset="utf-8"></script>
+  </head>
+  <body ng-controller="GrumbleCtrl as main">
+
+    <h1>Grumblr</h1>
+
+    <button ng-click="getGrumbles()">Get Grumbles</button>
+    <!-- grumbles variable, below, can be used when getGrumbles is called, above -->
+    <div ng-hide="grumble" ng-repeat="e in grumbles"><!-- no longer need main.grumbles because of the $scope injection -->
+      <h3 ng-click="showGrumble(e.id)">{{e.title}}</h3>
+    </div>
+
+    <div ng-show="grumble">
+      <h3>{{grumble.title}}</h3>
+      <h5>{{grumble.authorName}}</h5>
+      <button ng-click="destroyGrumble(grumble.id)">Delete Grumble</button>
+      <img src="{{grumble.photoUrl}}" alt="photo">
+    </div>
+
+    <form ng-submit="createGrumble(newGrumble)">
+      <label for="authorName">Author</label><br>
+      <input type="text" ng-model="newGrumble.authorName"><br>
+      <label for="title">Title</label><br>
+      <input type="text" ng-model="newGrumble.title"><br>
+      <label for="content">Content</label><br>
+      <input type="text" ng-model="newGrumble.content"><br>
+      <label for="photoUrl">Photo Url</label><br>
+      <input type="text" ng-model="newGrumble.photoUrl"><br>
+      <input type="submit" name="" value="Create a Grumble">
+    </form>
+
+  </body>
+</html>
